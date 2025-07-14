@@ -1,0 +1,204 @@
+@startuml EDA Circuit Partitioning Project Architecture
+
+left to right direction
+
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam classBackgroundColor #E8F4FD
+skinparam classBorderColor #2E86AB
+skinparam packageBackgroundColor #F0F8FF
+skinparam packageBorderColor #4682B4
+
+package "Data Layer (data/)" {
+    package "Generated Netlists (generated_netlists/)" {
+        class netlist_small_10n_20e {
+            +10 nodes
+            +20 edges
+            +connected graph structure
+        }
+        
+        class netlist_medium_20n_40e {
+            +20 nodes
+            +40 edges
+            +connected graph structure
+        }
+        
+        class netlist_large_50n_100e {
+            +50 nodes
+            +100 edges
+            +connected graph structure
+        }
+    }
+    
+    package "Raw Netlists (raw/)" {
+        class raw_netlist_small {
+            +raw small-scale netlist
+        }
+        
+        class raw_netlist_medium {
+            +raw medium-scale netlist
+        }
+        
+        class raw_netlist_large {
+            +raw large-scale netlist
+        }
+    }
+}
+
+package "Source Code Layer (src/)" {
+    package "Utility Layer (src/utils/)" {
+        class netlist_parser {
+            +parse_netlist_to_graph()
+            +validate_format()
+            +extract_components()
+        }
+        
+        class graph_visualizer {
+            +visualize_partitioned_graph()
+            +highlight_partitions()
+            +export_image()
+            +create_layout()
+        }
+    }
+
+    package "Core Algorithm Layer (src/core/)" {
+        class base_partitioning {
+            +simple_greedy_partition()
+            +calculate_cut_size()
+            +validate_partition()
+        }
+        
+        class kl_classic {
+            +kernighan_lin_partition()
+            +find_best_swap()
+            +update_gains()
+            +calculate_d_values()
+        }
+        
+        class kl_improvements {
+            +kernighan_lin_bfs_init()
+            +bfs_initialization()
+            +adaptive_passes()
+            +early_termination()
+        }
+        
+        class kl_original {
+            +kernighan_lin_original()
+            +random_initialization()
+            +classic_passes()
+        }
+    }
+}
+
+package "Script Layer (scripts/)" {
+    class generate_netlists {
+        +generate_guaranteed_connected_graph()
+        +create_small_netlist()
+        +create_medium_netlist()
+        +create_large_netlist()
+    }
+    
+    class create_combined_view {
+        +main()
+        +run_and_visualize_3x3()
+        +parse_command_line_args()
+        +select_algorithm()
+        +create_3x3_comparison()
+    }
+    
+    class run_experiments {
+        +run_all_experiments()
+        +create_comparison_plot()
+        +calculate_metrics()
+        +generate_csv_reports()
+    }
+}
+
+package "Results Layer (results/)" {
+    package "Performance Data (generate_data/)" {
+        class baseline_performance {
+            +max cut-edge reduction rate
+            +average cut-edge reduction rate
+            +average algorithm runtime
+            +result stability (std dev)
+        }
+        
+        class kl_classic_performance {
+            +max cut-edge reduction rate
+            +average cut-edge reduction rate
+            +average algorithm runtime
+            +result stability (std dev)
+        }
+        
+        class kl_improvements_performance {
+            +max cut-edge reduction rate
+            +average cut-edge reduction rate
+            +average algorithm runtime
+            +result stability (std dev)
+        }
+    }
+    
+    package "Visualization Images (images/)" {
+        class full_results_simple_greedy {
+            +3x3 combined comparison chart
+            +original->initial->final partition
+        }
+        
+        class full_results_classic_kl {
+            +3x3 combined comparison chart
+            +original->initial->final partition
+        }
+        
+        class full_results_kl_with_bfs {
+            +3x3 combined comparison chart
+            +original->initial->final partition
+        }
+        
+        class experiments_results {
+            +4-in-1 performance comparison chart
+            +max/avg cut-edge reduction rate
+            +runtime/result stability
+        }
+    }
+}
+
+' Data flow relationships
+generate_netlists --> netlist_small_10n_20e : generates
+generate_netlists --> netlist_medium_20n_40e : generates
+generate_netlists --> netlist_large_50n_100e : generates
+
+' Parsing relationships
+netlist_small_10n_20e --> netlist_parser : parses
+netlist_medium_20n_40e --> netlist_parser : parses
+netlist_large_50n_100e --> netlist_parser : parses
+raw_netlist_small --> netlist_parser : parses
+raw_netlist_medium --> netlist_parser : parses
+raw_netlist_large --> netlist_parser : parses
+
+' Algorithm call relationships
+create_combined_view --> base_partitioning : calls greedy algorithm
+create_combined_view --> kl_classic : calls classic KL algorithm
+create_combined_view --> kl_improvements : calls improved KL algorithm
+run_experiments --> base_partitioning : tests greedy algorithm
+run_experiments --> kl_classic : tests classic KL algorithm
+run_experiments --> kl_improvements : tests improved KL algorithm
+
+' Visualization relationships
+create_combined_view --> graph_visualizer : calls visualization
+run_experiments --> graph_visualizer : calls visualization
+
+' Result generation relationships
+run_experiments --> baseline_performance : generates performance data
+run_experiments --> kl_classic_performance : generates performance data
+run_experiments --> kl_improvements_performance : generates performance data
+create_combined_view --> full_results_simple_greedy : generates visualization
+create_combined_view --> full_results_classic_kl : generates visualization
+create_combined_view --> full_results_kl_with_bfs : generates visualization
+run_experiments --> experiments_results : generates comparison chart
+
+' Data transfer relationships
+netlist_parser --> base_partitioning : provides graph data
+netlist_parser --> kl_classic : provides graph data
+netlist_parser --> kl_improvements : provides graph data
+
+@enduml 

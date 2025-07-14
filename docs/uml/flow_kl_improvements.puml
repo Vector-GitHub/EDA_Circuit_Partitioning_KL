@@ -1,0 +1,23 @@
+@startuml Improved KL Algorithm Flow
+
+!theme plain
+title "Optimized Algorithm: KL with BFS Initial Partition"
+
+start
+
+partition "Generate BFS Initial Partition" {
+    :Randomly select a start node s;
+    :Perform BFS from s to get node visit order;
+    :Create partitions:
+    A = first N/2 visited nodes
+    B = remaining nodes;
+}
+
+:Execute full "Classic KL Algorithm"
+using the BFS partition as input;
+
+:Output final partitions from KL;
+
+stop
+
+@enduml 

@@ -1,0 +1,23 @@
+# Small Scale Netlist: 10 Nodes, 20 Edges - Raw Netlist
+# Format: SourceNode TargetNode Weight (Weight = 1 for simplicity)
+
+N0 N1 1
+N0 N2 1
+N0 N3 1
+N0 N4 1
+N1 N2 1
+N1 N5 1
+N2 N3 1
+N2 N6 1
+N3 N4 1
+N3 N7 1
+N4 N8 1
+N5 N6 1
+N5 N9 1
+N6 N7 1
+N7 N8 1
+N8 N9 1
+N0 N5 1
+N1 N6 1
+N2 N7 1
+N4 N9 1

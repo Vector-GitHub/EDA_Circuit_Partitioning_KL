@@ -1,0 +1,5 @@
+﻿,"Small (10n, 20e)","Medium (20n, 40e)","Large (50n, 100e)"
+Max Cut-edge Reduction Rate,33.33%,47.37%,55.00%
+Average Cut-edge Reduction Rate,19.18%,34.13%,42.72%
+Average Algorithm Runtime (s),0.000956,0.002611,0.021282
+Result Stability (Std Dev),0.0000,0.9539,1.3883

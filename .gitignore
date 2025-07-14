@@ -1,0 +1,30 @@
+# 字节码和缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env
+
+# IDE 和编辑器配置
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 生成的数据
+# 根据项目情况决定是否要将生成的数据纳入版本控制
+data/generated_netlists/
+
+# 构建和分发
+build/
+dist/
+*.egg-info/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db 

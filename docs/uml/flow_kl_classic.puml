@@ -1,0 +1,45 @@
+@startuml Classic KL Algorithm Flow
+
+!theme plain
+title "Classic Kernighan-Lin Algorithm"
+
+start
+
+:Initial Partition:
+Randomly create balanced partitions A and B;
+
+while (Last Pass produced positive gain?) is (yes)
+    partition "Start of Pass" {
+        :Initialize for Pass:
+        Mark all nodes as "unlocked";
+        :Calculate initial D-values for all nodes;
+    }
+
+    repeat :Inner loop for N/2 iterations
+        :Find best swap pair (ai, bi)
+        from unlocked nodes to maximize gain gi;
+        :Record pair (ai, bi) and gain gi;
+        :Lock nodes ai and bi;
+        :Update D-values for all
+        remaining unlocked nodes;
+    repeat while (N/2 iterations completed?) is (no)
+
+    :Find k* that maximizes
+    cumulative gain Gk*;
+
+    if (Gk* > 0?) then (yes)
+        :Execute the first k* swaps
+        permanently to update partitions;
+        :Begin new Pass;
+    else (no)
+        :No improvement,
+        algorithm converges;
+        break
+    endif
+endwhile (no positive gain)
+
+:Output final partitions;
+
+stop
+
+@enduml 

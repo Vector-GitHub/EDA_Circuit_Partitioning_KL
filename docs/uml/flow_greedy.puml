@@ -1,0 +1,32 @@
+@startuml Simple Greedy Algorithm Flow
+
+!theme plain
+title "Baseline Algorithm: Simple Greedy Strategy"
+
+start
+
+:Initial Partition:
+Randomly create balanced partitions A and B;
+
+while (Improvement found in last iteration?) is (yes)
+    :Calculate D-values for all nodes;
+    :Find best single swap (a*, b*)
+    that maximizes gain(a, b);
+
+    if (max_gain > 0?) then (yes)
+        :Execute swap:
+        Move a* to partition B
+        Move b* to partition A;
+        :Continue to next iteration;
+    else (no)
+        :No improvement possible,
+        algorithm terminates;
+        break
+    endif
+endwhile (no improvement)
+
+:Output final partitions and cut size;
+
+stop
+
+@enduml 
